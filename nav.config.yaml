@@ -34,7 +34,7 @@ password: admin
 port: 7777
 
 # 收录通知邮箱
-email: ''
+email: '2669719728@qq.com'
 
 # 自有部署邮件通知系统
 mailConfig:
@@ -42,8 +42,8 @@ mailConfig:
   port: 465
   secure: true
   auth:
-    user: ''
-    pass: ''
+    user: '2669719728@qq.com'
+    pass: '666666'
   title: 网站收录通知
   message: 有用户提交网站收录啦
 
