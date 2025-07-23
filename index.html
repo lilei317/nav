@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <title>导航 - lilei317/nav</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="一个简洁的导航页面" />
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="theme/default.css" />
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="data/nav.js"></script>
+    <script>
+      const app = document.getElementById("app");
+
+      function createLink(item) {
+        const a = document.createElement("a");
+        a.href = item.url;
+        a.target = "_blank";
+        a.rel = "noopener";
+        a.className = "nav-item";
+        a.textContent = item.name;
+        return a;
+      }
+
+      function createGroup(group) {
+        const section = document.createElement("section");
+        const title = document.createElement("h2");
+        title.textContent = group.title;
+        section.appendChild(title);
+
+        const container = document.createElement("div");
+        container.className = "group";
+
+        group.items.forEach((item) => {
+          container.appendChild(createLink(item));
+        });
+
+        section.appendChild(container);
+        return section;
+      }
+
+      function render(nav) {
+        nav.forEach((group) => {
+          app.appendChild(createGroup(group));
+        });
+      }
+
+      if (window.navData) {
+        render(window.navData);
+      } else {
+        fetch("data/nav.js")
+          .then((res) => res.text())
+          .then((text) => {
+            const script = document.createElement("script");
+            script.textContent = text;
+            document.body.appendChild(script);
+            render(window.navData);
+          });
+      }
+    </script>
+  </body>
+</html>
